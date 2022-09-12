@@ -2,7 +2,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Map.entry;  
 import java.util.Scanner;
 
 public class Ex2PhotonReventar {
@@ -46,15 +45,16 @@ public class Ex2PhotonReventar {
         reader.close();
         line = line.toLowerCase();
 
+        // loop over all the choices
         for (int i = 0; i < OpeningChoiceStrings.size(); ++i) {
             if (
                 line.contains(
                     OpeningChoiceStrings
-                        .get(i)
-                        .toLowerCase()
-                        .replaceAll("\\s.*", "")
+                        .get(i) // get the pertinent sting in the array
+                        .toLowerCase() // lowercase it
+                        .replaceAll("\\s.*", "") // remove after the space
                 ) ||
-                line.contains(Integer.toString(i))
+                line.contains(Integer.toString(i)) // or has the same number
             ) {
                 return OpeningChoice.fromInteger(i);
             }
@@ -64,11 +64,11 @@ public class Ex2PhotonReventar {
     }
 
     private Map<String, String> settings = Map.ofEntries(
-        
+        Entry("guesses", "3")
     );
 
-    private void change_settings () {
-
+    private Map<String, String> change_settings () {
+        
     }
 
     private boolean play_game () {
@@ -78,22 +78,23 @@ public class Ex2PhotonReventar {
     public void start() {
         boolean repeat = true;
         do {
-            OpeningChoice choice = show_open();
+            OpeningChoice choice = this.show_open();
 
+            if (choice == null) {
+                System.out.println("Invalid input- please try again.");
+                continue;
+            }
+            
             switch (choice) {
-                case null:
-                System.out.println("Entry not valid. Please try again.");
-                break;
-
                 case start_game:
                 boolean repeat_game = true;
                 do {
-                    repeat_game = play_game();
+                    repeat_game = this.play_game();
                 } while (repeat_game);
                 break;
 
                 case change_settings:
-
+                this.settings = change_settings();
             }
         } while (repeat);
     }
