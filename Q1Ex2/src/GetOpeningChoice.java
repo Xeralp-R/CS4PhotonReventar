@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class GetOpeningChoice {
 
-    public OpeningChoice get_opening_choice() {
+    public static OpeningChoice get_opening_choice() {
         while (true) {
             // print out choices
             System.out.println(

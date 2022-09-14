@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class GetSettings {
 
-    public Settings get_settings(final Settings current_settings) {
+    public static Settings get_settings(final Settings current_settings) {
         var temporary_settings = current_settings;
 
         exterior:while (true) {
@@ -75,7 +75,7 @@ public class GetSettings {
         return temporary_settings;
     }
 
-    private int change_guesses() {
+    private static int change_guesses() {
         int returner = -1;
 
         while (true) {
