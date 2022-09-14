@@ -1,46 +1,35 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+// the main class
 
 public class Ex2PhotonReventar {
 
-    private Settings settings = new Settings(3, false);
-
-    private boolean play_game () {
-        return false;
-    };
+    private Settings settings = new Settings(3, false, 1, 10);
 
     public void start() {
-        boolean repeat_all = true;
-        do {
-            OpeningChoice choice = this.show_open();
+        while(true) {
+            OpeningChoice choice = GetOpeningChoice.get_opening_choice();
 
-            if (choice == null) {
-                System.out.println("Invalid input- please try again.");
-                continue;
-            }
-            
             switch (choice) {
                 case start_game:
-                boolean repeat_game = true;
-                do {
-                    repeat_game = this.play_game();
-                } while (repeat_game);
-                break;
+                    Game game = new Game(this.settings);
+                    while (true) {
+                        boolean play_again = game.play();
+                        if (!play_again) break;
+                    }
+                    break;
 
                 case change_settings:
-                this.settings = change_settings();
-                break;
+                    this.settings = GetSettings.get_settings(this.settings);
+                    break;
 
                 case end_application:
-                repeat_all = false;
-                break;
+                    System.out.println("OK! Goodbye!");
+                    return;
             }
-        } while (repeat_all);
+        }
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        var main_class = new Ex2PhotonReventar();
+        main_class.start();
     }
 }

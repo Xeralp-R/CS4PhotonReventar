@@ -11,7 +11,7 @@ public class GetOpeningChoice {
                 String.join(
                     "\n",
                     "Welcome to Higher or Lower!",
-                    " What do you want to do?",
+                    "What do you want to do?",
                     String.join("\n", OpeningChoice.string_equivalents)
                 )
             );
@@ -28,7 +28,8 @@ public class GetOpeningChoice {
                     .contains(line.toLowerCase()) &&
                 // is a number greater than the number of string equivalents
                 !(
-                    Integer.parseInt(line) <= OpeningChoice.string_equivalents.length &&
+                    Integer.parseInt(line) <=
+                    OpeningChoice.string_equivalents.length &&
                     Integer.parseInt(line) > 0
                 )
             ) {
@@ -44,12 +45,11 @@ public class GetOpeningChoice {
             for (int i = 0; i < OpeningChoice.string_equivalents.length; ++i) {
                 if (
                     line.contains(
-                        OpeningChoice.string_equivalents
-                            [i] // get the pertinent sting in the array
-                            .toLowerCase() // lowercase it
+                        OpeningChoice
+                            .string_equivalents[i].toLowerCase() // get the pertinent sting in the array // lowercase it
                             .replaceAll("\\s.*", "") // remove after the space
                     ) ||
-                    line.contains(Integer.toString(i+1)) // or has the same number;
+                    line.contains(Integer.toString(i + 1)) // or has the same number;
                     // i+1 as they'll input 1-3, not 0-2
                 ) {
                     return OpeningChoice.fromInteger(i);

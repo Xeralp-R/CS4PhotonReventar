@@ -43,6 +43,9 @@ public class GetSettings {
             reader.close();
 
             // act on that input
+            // note: it would be more elegant to change it to an enum. 
+            // not right now, though, as it's not super necessary.
+            // the only evidence is the leftover "default" case.
             switch (final_input) {
                 case "guesses":
                     temporary_settings.guesses = change_guesses();
@@ -68,7 +71,6 @@ public class GetSettings {
                     break exterior;
                 default:
                 // impossible
-                // TODO: add exceptions
             }
         }
 
