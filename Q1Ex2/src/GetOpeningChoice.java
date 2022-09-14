@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class GetOpeningChoice {
 
     public static OpeningChoice get_opening_choice() {
+        Scanner reader = new Scanner(System.in);
+
         while (true) {
             // print out choices
             System.out.println(
@@ -18,26 +20,7 @@ public class GetOpeningChoice {
             System.out.print("> ");
 
             // get input
-            Scanner reader = new Scanner(System.in);
             String line = reader.nextLine();
-            if (
-                // is not a string within the string equivalents
-                !OpeningChoice.string_equivalents
-                    .toString()
-                    .toLowerCase()
-                    .contains(line.toLowerCase()) &&
-                // is a number greater than the number of string equivalents
-                !(
-                    Integer.parseInt(line) <=
-                    OpeningChoice.string_equivalents.length &&
-                    Integer.parseInt(line) > 0
-                )
-            ) {
-                System.out.println("Unclear input— please try again.");
-                reader.close();
-                continue; // the outermost loop: go back around from the top
-            }
-            reader.close();
             line = line.toLowerCase();
 
             // process input
@@ -48,16 +31,16 @@ public class GetOpeningChoice {
                         OpeningChoice
                             .string_equivalents[i].toLowerCase() // get the pertinent sting in the array // lowercase it
                             .replaceAll("\\s.*", "") // remove after the space
-                    ) ||
-                    line.contains(Integer.toString(i + 1)) // or has the same number;
-                    // i+1 as they'll input 1-3, not 0-2
+                    )
                 ) {
+                    reader.close();
                     return OpeningChoice.fromInteger(i);
                 }
             }
 
-            // unreachable error
-            return null;
+            // if it wasn't processed:
+            System.out.println("Unclear input— please try again.\n");
+            // loop back to the top.
         }
     }
 }

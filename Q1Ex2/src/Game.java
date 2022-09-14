@@ -22,6 +22,7 @@ public class Game {
         settings.lower_limit;
         int guesses_left = settings.guesses;
         boolean overdrive = false;
+        var reader = new Scanner(System.in);
 
         // begin printing
         System.out.printf(
@@ -33,7 +34,6 @@ public class Game {
         interior:while (true) {
             // take in input
             System.out.print("> ");
-            var reader = new Scanner(System.in);
             var line = reader.nextLine();
             int guessed_num = -1;
             try {
@@ -44,7 +44,6 @@ public class Game {
                 );
                 continue;
             }
-            reader.close();
 
             // check if it's higher or lower
             // extracted out so that, if the processing gets more complex in
@@ -72,14 +71,14 @@ public class Game {
                         "Would you like to play again? (y/anything else) "
                     );
 
-                    var reader_inner = new Scanner(System.in);
-                    var input = reader_inner.nextLine();
-                    reader_inner.close();
+                    var input = reader.nextLine();
                     switch (input.toLowerCase()) {
                         case "y":
                         case "yes":
+                            reader.close();
                             return true;
                         default:
+                            reader.close();
                             return false;
                     }
             }
@@ -108,14 +107,14 @@ public class Game {
                     );
 
                     // copied over from a previous thingy
-                    var reader_inner = new Scanner(System.in);
-                    var input = reader_inner.nextLine();
-                    reader_inner.close();
+                    var input = reader.nextLine();
                     switch (input.toLowerCase()) {
                         case "y":
                         case "yes":
+                            reader.close();
                             return true;
                         default:
+                            reader.close();
                             return false;
                     }
                 }
