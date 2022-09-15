@@ -95,7 +95,7 @@ public class Game {
                     );
                 } else {
                     System.out.printf(
-                        "You still have %d guesses left. Try again!",
+                        "You still have %d guesses left. Try again!%n",
                         guesses_left
                     );
                 }

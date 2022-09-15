@@ -20,7 +20,7 @@ public class Ex2PhotonReventar {
                     this.settings = GetSettings.get_settings(this.settings);
                     break;
                 case end_application:
-                    System.out.println("OK! Goodbye!");
+                    System.out.println("OK! Thank you for playing!");
                     return;
             }
         }
