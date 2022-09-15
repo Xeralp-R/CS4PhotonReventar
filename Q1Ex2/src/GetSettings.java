@@ -1,5 +1,7 @@
 // the get settings quasi-function object.
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -7,6 +9,7 @@ public class GetSettings {
 
     public static Settings get_settings(final Settings current_settings) {
         var temporary_settings = current_settings;
+        var reader = new BufferedReader(new InputStreamReader(System.in));
 
         exterior:while (true) {
             // print preliminary output
@@ -18,7 +21,6 @@ public class GetSettings {
             System.out.print("> ");
 
             // get input
-            Scanner reader = new Scanner(System.in);
             String[] allowable_inputs = {
                 "guesses",
                 "allow over limit",
@@ -26,7 +28,13 @@ public class GetSettings {
             };
             String final_input = null;
             while (true) {
-                String input = reader.nextLine();
+                String input = "";
+                try {
+                    input = reader.readLine();
+                } catch (Exception e) {
+                    System.err.println("Absurd entry. Trying again...");
+                    continue exterior;
+                }
                 input = input.toLowerCase();
 
                 if (!Arrays.asList(allowable_inputs).contains(input)) {
@@ -40,10 +48,9 @@ public class GetSettings {
                 final_input = input;
                 break;
             }
-            reader.close();
 
             // act on that input
-            // note: it would be more elegant to change it to an enum. 
+            // note: it would be more elegant to change it to an enum.
             // not right now, though, as it's not super necessary.
             // the only evidence is the leftover "default" case.
             switch (final_input) {
@@ -72,6 +79,15 @@ public class GetSettings {
                 default:
                 // impossible
             }
+        }
+
+        try {
+            reader.close();
+        } catch (Exception e) {
+            System.err.printf(
+                "Reader could not be closed: see %s%n",
+                e.toString()
+            );
         }
 
         return temporary_settings;

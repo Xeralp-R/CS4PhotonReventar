@@ -1,12 +1,8 @@
 // gets the opening choice
 
-import java.util.Scanner;
-
 public class GetOpeningChoice {
 
     public static OpeningChoice get_opening_choice() {
-        Scanner reader = new Scanner(System.in);
-
         while (true) {
             // print out choices
             System.out.println(
@@ -20,7 +16,13 @@ public class GetOpeningChoice {
             System.out.print("> ");
 
             // get input
-            String line = reader.nextLine();
+            String line = "";
+            try {
+                line = SingletonReader.get_instance().read_line();
+            } catch (Exception e) {
+                System.err.println("Absurd entry. Trying again...");
+                continue;
+            }
             line = line.toLowerCase();
 
             // process input
@@ -33,7 +35,6 @@ public class GetOpeningChoice {
                             .replaceAll("\\s.*", "") // remove after the space
                     )
                 ) {
-                    reader.close();
                     return OpeningChoice.fromInteger(i);
                 }
             }
