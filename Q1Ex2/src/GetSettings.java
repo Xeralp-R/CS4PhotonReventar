@@ -61,7 +61,10 @@ public class GetSettings {
                     );
                     System.out.print("> ");
 
-                    var line = SingletonReader.get_instance().read_line_quietly();
+                    var line = SingletonReader
+                        .get_instance()
+                        .read_line_quietly()
+                        .orElse("");
                     if (line == "y") {
                         temporary_settings.allow_over_limit =
                             !temporary_settings.allow_over_limit;
@@ -89,7 +92,10 @@ public class GetSettings {
             );
             System.out.print("> ");
 
-            var input = SingletonReader.get_instance().read_line();
+            var input = SingletonReader
+                .get_instance()
+                .read_line_quietly()
+                .orElse("");
             try {
                 // if it can parse the int right, return
                 returner = Integer.parseInt(input);

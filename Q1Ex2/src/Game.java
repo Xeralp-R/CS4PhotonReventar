@@ -33,7 +33,10 @@ public class Game {
         interior:while (true) {
             // take in input
             System.out.print("> ");
-            var line = SingletonReader.get_instance().read_line_quietly();
+            var line = SingletonReader
+                .get_instance()
+                .read_line_quietly()
+                .orElse("");
             int guessed_num = -1;
             try {
                 guessed_num = Integer.parseInt(line);
@@ -70,7 +73,10 @@ public class Game {
                         "Would you like to play again? (y/anything else) "
                     );
 
-                    var input = SingletonReader.get_instance().read_line_quietly();
+                    var input = SingletonReader
+                        .get_instance()
+                        .read_line_quietly()
+                        .orElse("");
                     switch (input.toLowerCase()) {
                         case "y":
                         case "yes":
@@ -104,14 +110,15 @@ public class Game {
                     );
 
                     // copied over from a previous thingy
-                    var input = SingletonReader.get_instance().read_line_quietly();
+                    var input = SingletonReader
+                        .get_instance()
+                        .read_line_quietly()
+                        .orElse("");
                     switch (input.toLowerCase()) {
                         case "y":
                         case "yes":
-                            this.close_reader(reader);
                             return true;
                         default:
-                            this.close_reader(reader);
                             return false;
                     }
                 }
