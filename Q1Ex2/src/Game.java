@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Scanner;
+// the game proper
 
 public class Game {
 
@@ -16,26 +14,6 @@ public class Game {
         this.settings = settings;
     }
 
-    private void close_reader(BufferedReader reader) {
-        try {
-            this.close_reader(reader);
-        } catch (Exception e) {
-            System.err.printf(
-                "Reader could not be closed: see %s%n",
-                e.toString()
-            );
-        }
-    }
-
-    private String read_line_safely(BufferedReader reader) {
-        try {
-            return reader.readLine();
-        } catch (Exception e) {
-            System.err.printf("Could not read from input: see %s%n", e.toString());
-            return "";
-        }
-    }
-
     public boolean play() {
         // generate the number and prepare other vars
         int true_num = (int) Math.floor(
@@ -44,7 +22,6 @@ public class Game {
         settings.lower_limit;
         int guesses_left = settings.guesses;
         boolean overdrive = false;
-        var reader = new BufferedReader(new InputStreamReader(System.in));
 
         // begin printing
         System.out.printf(
@@ -56,7 +33,7 @@ public class Game {
         interior:while (true) {
             // take in input
             System.out.print("> ");
-            var line = this.read_line_safely(reader);
+            var line = SingletonReader.get_instance().read_line_quietly();
             int guessed_num = -1;
             try {
                 guessed_num = Integer.parseInt(line);
@@ -93,14 +70,12 @@ public class Game {
                         "Would you like to play again? (y/anything else) "
                     );
 
-                    var input = this.read_line_safely(reader);
+                    var input = SingletonReader.get_instance().read_line_quietly();
                     switch (input.toLowerCase()) {
                         case "y":
                         case "yes":
-                            this.close_reader(reader);
                             return true;
                         default:
-                            this.close_reader(reader);
                             return false;
                     }
             }
@@ -129,7 +104,7 @@ public class Game {
                     );
 
                     // copied over from a previous thingy
-                    var input = this.read_line_safely(reader);
+                    var input = SingletonReader.get_instance().read_line_quietly();
                     switch (input.toLowerCase()) {
                         case "y":
                         case "yes":

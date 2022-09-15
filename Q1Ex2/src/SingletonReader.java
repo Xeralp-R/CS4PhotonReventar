@@ -1,9 +1,9 @@
+// apparently, you need this to read properly
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Optional;
-
-// apparently, you need this to read properly
 
 public class SingletonReader {
     // singleton part

@@ -1,15 +1,11 @@
 // the get settings quasi-function object.
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class GetSettings {
 
     public static Settings get_settings(final Settings current_settings) {
         var temporary_settings = current_settings;
-        var reader = new BufferedReader(new InputStreamReader(System.in));
 
         exterior:while (true) {
             // print preliminary output
@@ -30,7 +26,7 @@ public class GetSettings {
             while (true) {
                 String input = "";
                 try {
-                    input = reader.readLine();
+                    input = SingletonReader.get_instance().read_line();
                 } catch (Exception e) {
                     System.err.println("Absurd entry. Trying again...");
                     continue exterior;
@@ -65,8 +61,8 @@ public class GetSettings {
                     );
                     System.out.print("> ");
 
-                    var reader_inner = new Scanner(System.in);
-                    if (reader_inner.nextLine() == "y") {
+                    var line = SingletonReader.get_instance().read_line_quietly();
+                    if (line == "y") {
                         temporary_settings.allow_over_limit =
                             !temporary_settings.allow_over_limit;
                         System.out.println("Settings were changed.");
@@ -81,15 +77,6 @@ public class GetSettings {
             }
         }
 
-        try {
-            reader.close();
-        } catch (Exception e) {
-            System.err.printf(
-                "Reader could not be closed: see %s%n",
-                e.toString()
-            );
-        }
-
         return temporary_settings;
     }
 
@@ -102,17 +89,15 @@ public class GetSettings {
             );
             System.out.print("> ");
 
-            var reader = new Scanner(System.in);
-            var input = reader.next();
+            var input = SingletonReader.get_instance().read_line();
             try {
                 // if it can parse the int right, return
                 returner = Integer.parseInt(input);
-                reader.close();
+                System.out.println("Settings were changed.");
                 break;
             } catch (Exception e) {
                 // if it can't, go back to the top
                 System.out.println("Invalid input— please try again.");
-                reader.close();
                 continue;
             }
         }
