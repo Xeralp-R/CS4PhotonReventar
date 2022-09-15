@@ -65,7 +65,7 @@ public class GetSettings {
                         .get_instance()
                         .read_line_quietly()
                         .orElse("");
-                    if (line == "y") {
+                    if (line.equalsIgnoreCase("y")) {
                         temporary_settings.allow_over_limit =
                             !temporary_settings.allow_over_limit;
                         System.out.println("Settings were changed.");
