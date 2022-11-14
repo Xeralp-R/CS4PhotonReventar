@@ -1,6 +1,6 @@
-import java.util.ArrayList;
-
 package monstertypes;
+
+import java.util.ArrayList;
 
 public class Monster {
     private final String name, type, strongAgainst, weakAgainst;
