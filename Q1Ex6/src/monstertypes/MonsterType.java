@@ -1,7 +1,7 @@
 package monstertypes;
 
-enum MonsterTypes {
+enum MonsterType {
 	Fire,
 	Water,
-	Grass,
+	Grass
 }
