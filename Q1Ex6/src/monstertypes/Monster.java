@@ -2,8 +2,8 @@ package monstertypes;
 
 import java.util.ArrayList;
 
-public class Monster {
-    private final String name, type, strongAgainst, weakAgainst;
+abstract class Monster {
+    protected final String name, type, strongAgainst, weakAgainst;
     protected int maxHP, hp, atk, def, xp, lvl;
     private boolean guard, charge;
     private static ArrayList<Monster> monsterList = new ArrayList<>();

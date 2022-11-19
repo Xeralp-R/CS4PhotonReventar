@@ -34,7 +34,7 @@ final class TypeData {
 
     public static final Map<MonsterType, StatModifierRecord> statModifierMap = Map.ofEntries(
         entry(MonsterType.Fire, new StatModifierRecord(1.3, 0.7)),
-        entry(MonsterType.Water, new StatModifierRecord(1.0, 1.0)),
-        entry(MonsterType.Grass, new StatModifierRecord(0.7, 1.3))
+        entry(MonsterType.Water, new StatModifierRecord(0.7, 1.3)),
+        entry(MonsterType.Grass, new StatModifierRecord(1.0, 1.0))
     );
 }
