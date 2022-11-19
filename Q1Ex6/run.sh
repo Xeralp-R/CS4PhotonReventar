@@ -1,3 +1,5 @@
+# CURRENTLY OUT OF ORDER. COMPILE IN AN IDE (?)
+
 # if there isn't a bin folder, make one
 [ ! -d bin/ ] &&  mkdir bin/
 
