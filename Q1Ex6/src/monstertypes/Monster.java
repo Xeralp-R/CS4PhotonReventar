@@ -2,6 +2,10 @@ package monstertypes;
 
 import java.util.ArrayList;
 
+// changes:
+// made monster an abstract class
+// made some parts protected instead of private
+
 abstract class Monster {
     protected final String name, type, strongAgainst, weakAgainst;
     protected int maxHP, hp, atk, def, xp, lvl;
