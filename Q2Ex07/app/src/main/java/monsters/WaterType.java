@@ -1,4 +1,4 @@
-package monstertypes;
+package monsters;
 
 public class WaterType extends TypedMonster {
 

@@ -1,4 +1,4 @@
-package monstertypes;
+package monsters;
 
 abstract public class TypedMonster extends Monster {
 

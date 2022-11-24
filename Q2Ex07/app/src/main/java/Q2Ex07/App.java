@@ -3,6 +3,8 @@
  */
 package Q2Ex07;
 
+import monsters.FireType;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
@@ -10,5 +12,8 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
+        
+        FireType monster = new FireType("Charmander", 100, 100);
+        monster.special();
     }
 }

@@ -1,4 +1,4 @@
-package monstertypes;
+package monsters;
 
 import java.util.Arrays;
 import java.util.List;

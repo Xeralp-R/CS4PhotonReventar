@@ -1,4 +1,6 @@
-import java.util.*;
+package locations;
+
+import java.util.ArrayList;
 
 public class Location {
     private String name;

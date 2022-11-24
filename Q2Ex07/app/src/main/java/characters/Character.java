@@ -1,5 +1,7 @@
+package characters;
+
 public class Character {
-    private String name;
+    private final String name;
     private Location currentLocation;
 
     public Character(String n){

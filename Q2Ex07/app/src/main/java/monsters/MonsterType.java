@@ -1,4 +1,4 @@
-package monstertypes;
+package monsters;
 
 enum MonsterType {
 	Fire,
