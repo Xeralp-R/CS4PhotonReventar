@@ -36,3 +36,13 @@ tasks.named('test') {
     // Use junit platform for unit tests.
     useJUnitPlatform()
 }
+
+// personal additions
+//sourceCompatibility = '1.14'
+//targetCompatibility = '1.14'
+
+java {
+    toolchain {
+           languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
