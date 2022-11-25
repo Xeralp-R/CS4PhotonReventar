@@ -2,7 +2,7 @@ package characters;
 
 import locations.Location;
 
-public class Character {
+abstract public class Character {
     private final String name;
     private Location currentLocation;
 

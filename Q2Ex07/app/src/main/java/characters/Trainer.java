@@ -1,6 +1,8 @@
 package characters;
 
 import java.util.ArrayList;
+
+import interfaces.Interactive;
 import locations.Location;
 import monsters.TypedMonster;
 
@@ -46,5 +48,9 @@ public class Trainer extends Character {
 
   public void battle(Trainer t) {
     activeMonster.attack(t.getActiveMonster());
+  }
+
+  public void inspect(Interactive i) {
+    i.interact();
   }
 }

@@ -3,17 +3,22 @@
  */
 package Q2Ex07;
 
+import characters.NPC;
+import characters.Trainer;
+import locations.Location;
 import monsters.FireType;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-        
-        FireType monster = new FireType("Charmander", 100, 100);
-        monster.special();
+        Trainer person = new Trainer("Ash");
+
+        FireType monster = new FireType("Charmander", 146, 99);
+        person.inspect(monster);
+
+        NPC mom = new NPC("Mom", "Hello there! Do you want to rest?");
+        person.inspect(mom);
+
+        Location house = new Location("Home", "mom's cooking");
+        person.inspect(house);
     }
 }

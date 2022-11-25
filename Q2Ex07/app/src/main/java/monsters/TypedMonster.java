@@ -1,6 +1,8 @@
 package monsters;
 
-abstract public class TypedMonster extends Monster {
+import interfaces.Interactive;
+
+abstract public class TypedMonster extends Monster implements Interactive {
 
     public final MonsterType type;
     public final TypeData.EffectivityRecord effectivities;
@@ -44,5 +46,10 @@ abstract public class TypedMonster extends Monster {
         this.type = type;
         this.effectivities = TypeData.effectivityMap.get(type);
         this.modifiers = TypeData.statModifierMap.get(type);
+    }
+
+    @Override
+    public void interact() {
+        System.out.printf("Monster %s is a %s type.%n", super.name, this.type.toString());
     }
 }

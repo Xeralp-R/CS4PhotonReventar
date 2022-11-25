@@ -2,8 +2,9 @@ package locations;
 
 import java.util.ArrayList;
 import characters.Character;
+import interfaces.Interactive;
 
-public class Location {
+public class Location implements Interactive {
     private String name;
     private ArrayList<Character> personList;
     private String localSpecialty;
@@ -30,5 +31,10 @@ public class Location {
     }
     public void removePerson(Character c){
         personList.remove(c);
+    }
+
+    @Override
+    public void interact() {
+        System.out.printf("Our specialty is %s!%n", localSpecialty);
     }
 }
