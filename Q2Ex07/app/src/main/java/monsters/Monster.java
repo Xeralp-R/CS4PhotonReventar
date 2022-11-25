@@ -97,9 +97,7 @@ abstract class Monster {
         System.out.println(name + " rested. It's health is now " + hp + ".");
     }
 
-    public void special(){
-        System.out.println(name + " did a pose.");
-    }
+    abstract public void special();
 
     public void resetHealth(){
         hp = maxHP;
