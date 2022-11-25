@@ -1,6 +1,7 @@
 package locations;
 
 import java.util.ArrayList;
+import characters.Character;
 
 public class Location {
     private String name;

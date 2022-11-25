@@ -1,3 +1,7 @@
+package characters;
+
+import locations.Location;
+
 public class NPC extends Character {
     private String dialog;
 
