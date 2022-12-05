@@ -1,4 +1,9 @@
-public class NPC extends Character {
+package characters;
+
+import interfaces.Interactive;
+import locations.Location;
+
+public class NPC extends Character implements Interactive {
     private String dialog;
 
     public NPC(String n){
@@ -16,5 +21,10 @@ public class NPC extends Character {
     public NPC(String n, Location l, String d){
         super(n, l);
         this.dialog = d;
+    }
+
+    @Override
+    public void interact() {
+        System.out.println(dialog);
     }
 }

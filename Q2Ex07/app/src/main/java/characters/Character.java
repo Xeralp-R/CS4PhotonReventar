@@ -1,6 +1,8 @@
 package characters;
 
-public class Character {
+import locations.Location;
+
+abstract public class Character {
     private final String name;
     private Location currentLocation;
 
