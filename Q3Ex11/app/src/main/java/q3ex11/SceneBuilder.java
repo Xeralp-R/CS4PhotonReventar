@@ -1,11 +1,13 @@
+package q3ex11;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 
-import Subject.java;
-
-public static class SceneBuilder {
-    public static SceneBuilder() {}
+public class SceneBuilder {
+    private SceneBuilder() {}
     
     public static Screen buildScreen (Subject s) {
         VBox central_display = new VBox();

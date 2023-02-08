@@ -1,4 +1,6 @@
-public class Subject {
+package q3ex11;
+
+class Subject {
     private String name, imgFileName;
     private double units, grade;
 	
