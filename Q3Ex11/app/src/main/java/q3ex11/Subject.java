@@ -11,21 +11,21 @@ class Subject {
         grade = g;
     }
     public String getName() {
-        return name;
+        return this.name;
     }
     public String getImgFileName(){
-        return imgFileName;
+        return this.imgFileName;
     }
     public double getUnits() {
-        return units;
+        return this.units;
     }
     public void setUnits(double units) {
-        units = units;
+        this.units = units;
     }
     public double getGrade() {
-        return grade;
+        return this.grade;
     }
     public void setGrade(double grade) {
-        grade = grade;
+        this.grade = grade;
     }
 }
