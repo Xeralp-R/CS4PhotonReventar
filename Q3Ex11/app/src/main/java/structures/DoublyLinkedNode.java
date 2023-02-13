@@ -4,13 +4,13 @@ package structures;
  * Thank you to Matt Aboset for this code
  */
 
-public class DLLNode<T> {
-    protected DLLNode<T> next;        //next node reference
-	protected DLLNode<T> previous;    //previous node reference
+public class DoublyLinkedNode<T> {
+    protected DoublyLinkedNode<T> next;        //next node reference
+	protected DoublyLinkedNode<T> previous;    //previous node reference
 	protected T data;				  //data in the node
 	
     //DLLNode constructor with one argument
-	public DLLNode(T data) 
+	public DoublyLinkedNode(T data) 
 	{   
 		  this.data = data;
 	      next = null;
@@ -18,13 +18,13 @@ public class DLLNode<T> {
 	}
 
     //returns the next node in this list
-	public DLLNode<T> getNext()
+	public DoublyLinkedNode<T> getNext()
 	{
 		return next;
 	}
 
     //sets the next node in the list
-	public void setNext(DLLNode<T> next) 
+	public void setNext(DoublyLinkedNode<T> next) 
 	{
 		this.next = next;
 	}
@@ -42,13 +42,13 @@ public class DLLNode<T> {
 	}
 	
     //gets the previous node in this list
-	public DLLNode<T> getPrevious() 
+	public DoublyLinkedNode<T> getPrevious() 
 	{
 		return previous;
 	}
 	
     //sets the previous node in this list
-	public void setPrevious(DLLNode<T> previous) 
+	public void setPrevious(DoublyLinkedNode<T> previous) 
 	{
 		this.previous = previous;	
 	}

@@ -1,9 +1,9 @@
 package structures;
 
 public class CircularDoublyLinkedList<T> {
-    protected DLLNode<T> head;		 //the first node of the list
-	protected DLLNode<T> tail;		 //the last node of the list
-	protected DLLNode<T> location;	 // true if element found, else false
+    protected DoublyLinkedNode<T> head;		 //the first node of the list
+	protected DoublyLinkedNode<T> tail;		 //the last node of the list
+	protected DoublyLinkedNode<T> location;	 // true if element found, else false
 	protected int numElements;		 // Number of elements in this list
 	protected boolean found;         // true if element found, else false
 
@@ -103,7 +103,7 @@ public class CircularDoublyLinkedList<T> {
       // Adds element to this list.
 	public void add(T data)
 	{
-		DLLNode<T> newNode = new DLLNode<T>(data);   // Reference to the new node being added
+		DoublyLinkedNode<T> newNode = new DoublyLinkedNode<T>(data);   // Reference to the new node being added
 	   	
 	   	 if (isEmpty())            // Adding into an empty list
 	   	 {
@@ -126,7 +126,7 @@ public class CircularDoublyLinkedList<T> {
     //adds new element to the front of the list
     public void addFront(T data) 
     {
-    	DLLNode<T> newNode = new DLLNode<T>(data);   // Reference to the new node being added
+    	DoublyLinkedNode<T> newNode = new DoublyLinkedNode<T>(data);   // Reference to the new node being added
 	   	
     	if (isEmpty())            // Adding into an empty list
 	   	 {
@@ -150,7 +150,7 @@ public class CircularDoublyLinkedList<T> {
     //adds new element to the back of the list
     public void addBack(T data)
     {
-    	DLLNode<T> newNode = new DLLNode<T>(data);   // Reference to the new node being added
+    	DoublyLinkedNode<T> newNode = new DoublyLinkedNode<T>(data);   // Reference to the new node being added
 	   	
 	   	 if (isEmpty())            // Adding into an empty list
 	   	 {
@@ -173,7 +173,7 @@ public class CircularDoublyLinkedList<T> {
     //adds new element to the specified position
     public void addAtPosition(T data, int position)
     {
-   	 DLLNode<T> newNode = new DLLNode<T>(data);
+   	 DoublyLinkedNode<T> newNode = new DoublyLinkedNode<T>(data);
 
 		if (isEmpty()) {
 			// add element to an empty list
@@ -317,7 +317,7 @@ public class CircularDoublyLinkedList<T> {
     {
     	String item = "List: [ ";
         
-    		DLLNode<T> current = head;
+    		DoublyLinkedNode<T> current = head;
  
     		if(!isEmpty()){
     			
@@ -339,7 +339,7 @@ public class CircularDoublyLinkedList<T> {
     	
     	String item = "List: [ ";
         
-    		DLLNode<T> current = tail;
+    		DoublyLinkedNode<T> current = tail;
  
     		if(!isEmpty()){
     			do{
