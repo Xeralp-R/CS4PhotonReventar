@@ -34,9 +34,7 @@ public class CircularDoublyLinkedList<T> {
         found = false;
         if (!isEmpty()) {
             do {
-                if (
-                    location.getData().equals(target)
-                ) { // if they match
+                if (location.getData().equals(target)) { // if they match
                     found = true;
                     return;
                 } else {
@@ -45,6 +43,28 @@ public class CircularDoublyLinkedList<T> {
             } while (location != tail.getNext());
         }
     }
+
+    // alternative find implementation:
+    public DoublyLinkedNode<T> findNode(T target) {
+        if (isEmpty()) {
+            return null;
+        }
+
+        DoublyLinkedNode<T> location = head;
+
+        do {
+            if (location.getData().equals(target)) { // if they match
+                return location;
+            }
+            location = location.getNext();
+        } while (location != tail.getNext());
+
+        return null;
+    }
+
+	public T findElement(T target) {
+		return findNode(target).getData();
+	}
 
     // Returns true if this list contains an element e such that
     // e.equals(element), otherwise returns false.
@@ -70,6 +90,30 @@ public class CircularDoublyLinkedList<T> {
         }
     }
 
+	public DoublyLinkedNode<T> getNode(int position) {
+		if (isEmpty()) {
+			return null;
+		}
+
+		// positive position
+		int true_position =
+            (position % numElements + numElements) % numElements;
+
+		int start = 0;
+        DoublyLinkedNode<T> location = head;
+
+		while (start < true_position) {
+			location = location.getNext();
+			++start;
+		}
+
+		return location;
+	}
+
+	public T getElement(int position) {
+		return getNode(position).getData();
+	}
+
     // Returns an element e from this list such that e.equals(element);
     // if no such element exists, returns null.
     public T get(T data) {
@@ -87,9 +131,7 @@ public class CircularDoublyLinkedList<T> {
     public void add(T data) {
         DoublyLinkedNode<T> newNode = new DoublyLinkedNode<T>(data); // Reference to the new node being added
 
-        if (
-            isEmpty()
-        ) { // Adding into an empty list
+        if (isEmpty()) { // Adding into an empty list
             head = newNode;
             tail = newNode;
             head.setPrevious(tail);
@@ -107,9 +149,7 @@ public class CircularDoublyLinkedList<T> {
     public void addFront(T data) {
         DoublyLinkedNode<T> newNode = new DoublyLinkedNode<T>(data); // Reference to the new node being added
 
-        if (
-            isEmpty()
-        ) { // Adding into an empty list
+        if (isEmpty()) { // Adding into an empty list
             head = newNode;
             tail = newNode;
             head.setPrevious(tail);
@@ -128,9 +168,7 @@ public class CircularDoublyLinkedList<T> {
     public void addBack(T data) {
         DoublyLinkedNode<T> newNode = new DoublyLinkedNode<T>(data); // Reference to the new node being added
 
-        if (
-            isEmpty()
-        ) { // Adding into an empty list
+        if (isEmpty()) { // Adding into an empty list
             head = newNode;
             tail = newNode;
             head.setPrevious(tail);
@@ -190,19 +228,14 @@ public class CircularDoublyLinkedList<T> {
         if (found) {
             if (
                 location == head && size() == 1
-            ) //empties the list //removes the only existing element
-            {
+            ) { //empties the list //removes the only existing element
                 head = null;
                 tail = null;
-            } else if (
-                location == head
-            ) { //removes first node
+            } else if (location == head) { //removes first node
                 head = head.getNext();
                 head.setPrevious(tail);
                 tail.setNext(head);
-            } else if (
-                location == tail
-            ) { //removes last node
+            } else if (location == tail) { //removes last node
                 tail = tail.getPrevious();
                 tail.setNext(head);
                 head.setPrevious(tail);
@@ -246,10 +279,7 @@ public class CircularDoublyLinkedList<T> {
         numElements--;
     }
 
-    public void removeAtPosition(
-        int position
-    ) //removes the element in the specified position
-    {
+    public void removeAtPosition(int position) { //removes the element in the specified position
         if (position <= 0) { //removes front element
             head = head.getNext();
             head.setPrevious(tail);

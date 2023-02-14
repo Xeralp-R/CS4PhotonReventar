@@ -1,18 +1,15 @@
 package q3ex11;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import structures.CircularDoublyLinkedList;
+import structures.DoublyLinkedNode;
+
 public class App extends Application {
-    ArrayList<Subject> subjects;
-    Iterator<Subject> subject_iterator;
+    CircularDoublyLinkedList<Subject> subjects = new CircularDoublyLinkedList<>();
+    DoublyLinkedNode<Subject> current_subject;
 
     private void loadSubjects() {
         Subject math = new Subject("Math", "math.png", 4, 1.75);
@@ -21,8 +18,13 @@ public class App extends Application {
         Subject physics = new Subject("Physics", "physics.png", 3, 1.75);
         Subject cs = new Subject("CS", "computer science.png", 1, 1.5);
 
-        this.subjects = new ArrayList<>(Arrays.asList(math, bio, chem, physics, cs));
-        this.subject_iterator = this.subjects.iterator();
+        // make more efficient
+        this.subjects.add(math);
+        this.subjects.add(bio);
+        this.subjects.add(chem);
+        this.subjects.add(physics);
+        this.subjects.add(cs);
+        this.current_subject = this.subjects.getNode(0);
     }
     
     @Override 
@@ -31,10 +33,34 @@ public class App extends Application {
         //String javafxVersion = System.getProperty("javafx.version");
         
         this.loadSubjects();
-        Scene scene = new Scene(SceneBuilder.buildScreen(subject_iterator.next()), 640, 400);
 
-        stage.setScene(scene);
-        stage.show();
+        
+        while(true) {
+            try {
+                var change_screen_future = SwitchboardSingleton.get_instance().subscribe("change_screen_event");
+                var overarching_node = SceneBuilder.buildScreen(current_subject.getData());
+        
+                Scene scene = new Scene(overarching_node, 640, 400);
+
+                stage.setScene(scene);
+                stage.show();
+
+                change_screen_future.get();
+
+                if (change_screen_future.get().message == "left") {
+                    current_subject = current_subject.getPrevious();
+                    continue;
+                } else if (change_screen_future.get().message == "right") {
+                    current_subject = current_subject.getNext();
+                    continue;
+                } else {
+                    System.err.print("Impossible error");
+                    System.exit(2);
+                }
+            } catch (Exception e) {
+                continue;
+            }
+        }
     }
     
     public static void main(String[] args) {
