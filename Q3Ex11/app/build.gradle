@@ -7,38 +7,23 @@
  */
 
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
-    id 'application'
+    id 'q3ex11.java-application-conventions'
 
-    // for gradle
+    // for javafx
     id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
-repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
-}
-
 dependencies {
-    // Use JUnit Jupiter for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
-
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.1-jre'
+    implementation project(':utils')
 }
 
 application {
     // Define the main class for the application.
-    mainClass = 'q3ex11.App'
-}
-
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
+    mainClass = 'q3ex11.app.App'
 }
 
 
-// gradle stuff!
+// javafx stuff!
 
 javafx {
     version = "19"

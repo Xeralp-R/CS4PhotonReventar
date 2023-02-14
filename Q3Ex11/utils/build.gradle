@@ -1,0 +1,3 @@
+plugins {
+    id 'q3ex11.java-library-conventions'
+}

@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'Q3Ex11'
-include('app')
+include('app', 'utils')
