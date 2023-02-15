@@ -11,7 +11,12 @@ import javafx.scene.image.ImageView;
 public class SceneBuilder {
     public static Pane buildScreen (Subject subject) {
         Label subject_name = new Label(subject.getName());
-        VBox central_display = new VBox(subject_name);
+        ImageView subject_image = new ImageView(subject.getImgFileName());
+        Label units = new Label(String.format("Units: %.2f", subject.getUnits()));
+        Label grade = new Label(String.format("Grade: %.2f", subject.getGrade()));
+
+        VBox central_display = new VBox(10);
+        central_display.getChildren().addAll(subject_name, subject_image, units, grade);
         
         central_display.setAlignment(Pos.CENTER);
             
@@ -38,7 +43,8 @@ public class SceneBuilder {
             }
         });
         
-        HBox overarching = new HBox(button_left, central_display, button_right);
+        HBox overarching = new HBox(10);
+        overarching.getChildren().addAll(button_left, central_display, button_right);
         
         return overarching;
     }

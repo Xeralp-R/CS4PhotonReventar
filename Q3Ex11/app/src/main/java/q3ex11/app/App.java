@@ -17,7 +17,7 @@ public class App extends Application implements EventReceiverInterface {
         Subject bio = new Subject("Biology", "biology.png", 3, 2.0);
         Subject chem = new Subject("Chemistry", "chemistry.png", 3, 1.5);
         Subject physics = new Subject("Physics", "physics.png", 3, 1.75);
-        Subject cs = new Subject("CS", "computer science.png", 1, 1.5);
+        Subject cs = new Subject("CS", "computer_science.png", 1, 1.5);
 
         // make more efficient
         this.subjects.add(math);
@@ -38,14 +38,15 @@ public class App extends Application implements EventReceiverInterface {
         switch (change_screen_event.message) {
             case "left":
                 current_subject = current_subject.getPrevious();
+                break;
             case "right":
                 current_subject = current_subject.getNext();
+                break;
             default:
                 System.err.println("invalid arrow direction");
-
-                this.stage.setScene(new Scene(SceneBuilder.buildScreen(current_subject.getData())));
                 break;
         }
+        this.stage.setScene(new Scene(SceneBuilder.buildScreen(current_subject.getData())));
     }
 
     @Override
@@ -65,7 +66,7 @@ public class App extends Application implements EventReceiverInterface {
             current_subject.getData()
         );
 
-        Scene scene = new Scene(overarching_node, 640, 400);
+        Scene scene = new Scene(overarching_node);
 
         this.stage.setScene(scene);
         this.stage.show();
