@@ -3,13 +3,14 @@ package q3ex11.app;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import q3ex11.utils.CircularDoublyLinkedList;
 import q3ex11.utils.DoublyLinkedNode;
 
-public class App extends Application {
+public class App extends Application implements EventReceiverInterface {
     CircularDoublyLinkedList<Subject> subjects = new CircularDoublyLinkedList<>();
     DoublyLinkedNode<Subject> current_subject;
+
+    Stage stage;
 
     private void loadSubjects() {
         Subject math = new Subject("Math", "math.png", 4, 1.75);
@@ -26,43 +27,50 @@ public class App extends Application {
         this.subjects.add(cs);
         this.current_subject = this.subjects.getNode(0);
     }
-    
-    @Override 
+
+    public void receiveEvent(String eName, EventWrapper eWrapper) {
+        if (eName == "change_screen_event") {
+            change_screen(eWrapper);
+        }
+    }
+
+    public void change_screen(EventWrapper change_screen_event) {
+        switch (change_screen_event.message) {
+            case "left":
+                current_subject = current_subject.getPrevious();
+            case "right":
+                current_subject = current_subject.getNext();
+            default:
+                System.err.println("invalid arrow direction");
+
+                this.stage.setScene(new Scene(SceneBuilder.buildScreen(current_subject.getData())));
+                break;
+        }
+    }
+
+    @Override
     public void start(Stage stage) {
         //String javaVersion = System.getProperty("java.version");
         //String javafxVersion = System.getProperty("javafx.version");
-        
+
+        this.stage = stage;
+
         this.loadSubjects();
 
-        
-        while(true) {
-            try {
-                var change_screen_future = SwitchboardSingleton.get_instance().subscribe("change_screen_event");
-                var overarching_node = SceneBuilder.buildScreen(current_subject.getData());
-        
-                Scene scene = new Scene(overarching_node, 640, 400);
+        SwitchboardSingleton
+            .get_instance()
+            .subscribe("change_screen_event", this);
 
-                stage.setScene(scene);
-                stage.show();
+        var overarching_node = SceneBuilder.buildScreen(
+            current_subject.getData()
+        );
 
-                change_screen_future.get();
+        Scene scene = new Scene(overarching_node, 640, 400);
 
-                if (change_screen_future.get().message == "left") {
-                    current_subject = current_subject.getPrevious();
-                    continue;
-                } else if (change_screen_future.get().message == "right") {
-                    current_subject = current_subject.getNext();
-                    continue;
-                } else {
-                    System.err.print("Impossible error");
-                    System.exit(2);
-                }
-            } catch (Exception e) {
-                continue;
-            }
-        }
+        this.stage.setScene(scene);
+        this.stage.show();
     }
-    
+
     public static void main(String[] args) {
         launch();
     }

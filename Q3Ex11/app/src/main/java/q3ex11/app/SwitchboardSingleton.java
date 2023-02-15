@@ -2,8 +2,10 @@ package q3ex11.app;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+
 
 public class SwitchboardSingleton {
     private static SwitchboardSingleton single_instance = null;
@@ -17,18 +19,14 @@ public class SwitchboardSingleton {
     }
 
 
-    Map<String, ArrayList<CompletableFuture<EventWrapper>>> subscriberList;
+    Map<String, ArrayList<EventReceiverInterface>> subscriberList = new HashMap<String, ArrayList<EventReceiverInterface>>();
      
-    public CompletableFuture<EventWrapper> subscribe(String event_name) {
-        var promise = new CompletableFuture<EventWrapper>();
-
+    public void subscribe(String event_name, EventReceiverInterface receiver) {
         if (subscriberList.containsKey(event_name)) {
-            this.subscriberList.get(event_name).add(promise);
+            this.subscriberList.get(event_name).add(receiver);
         } else {
-            this.subscriberList.put(event_name, new ArrayList<>(Arrays.asList(promise)));
+            this.subscriberList.put(event_name, new ArrayList<>(Arrays.asList(receiver)));
         }
-
-        return promise;
     }
 
     public void alert(String event_name, EventWrapper event) throws ObjectNotFoundException {
@@ -36,8 +34,8 @@ public class SwitchboardSingleton {
             throw new ObjectNotFoundException(String.format("No such event %s", event_name));
         }
 
-        for (CompletableFuture<EventWrapper> i : subscriberList.get(event_name)) {
-            i.complete(event);
+        for (EventReceiverInterface i : subscriberList.get(event_name)) {
+            i.receiveEvent(event_name, event);
         }
     }
 }
