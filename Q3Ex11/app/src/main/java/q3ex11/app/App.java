@@ -69,6 +69,7 @@ public class App extends Application implements EventReceiverInterface {
         Scene scene = new Scene(overarching_node);
 
         this.stage.setScene(scene);
+        this.stage.setTitle("Q3Ex11");
         this.stage.show();
     }
 

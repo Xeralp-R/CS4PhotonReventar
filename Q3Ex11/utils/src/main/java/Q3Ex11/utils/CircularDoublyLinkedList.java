@@ -141,6 +141,8 @@ public class CircularDoublyLinkedList<T> {
             newNode.setPrevious(tail);
             tail = newNode;
             tail.setNext(head);
+            // line the implementer forgot?
+            head.setPrevious(tail);
         }
         numElements++;
     }
