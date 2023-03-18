@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'Q3Continuing'
-include('app', 'list', 'utilities')
+include('app', 'utilities')

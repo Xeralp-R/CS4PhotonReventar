@@ -3,3 +3,6 @@
 
 # Ignore Gradle build output directory
 build
+
+# New: ignore the .idea file!
+.idea
