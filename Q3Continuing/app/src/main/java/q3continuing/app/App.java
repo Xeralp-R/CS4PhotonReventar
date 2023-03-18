@@ -1,10 +1,10 @@
-package q3ex11.app;
+package q3continuing.app;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import q3ex11.utils.CircularDoublyLinkedList;
-import q3ex11.utils.DoublyLinkedNode;
+import q3continuing.utilities.CircularDoublyLinkedList;
+import q3continuing.utilities.DoublyLinkedNode;
 
 public class App extends Application implements EventReceiverInterface {
     CircularDoublyLinkedList<Subject> subjects = new CircularDoublyLinkedList<>();

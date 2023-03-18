@@ -1,4 +1,4 @@
-package q3ex11.app;
+package q3continuing.app;
 
 class Subject {
     private String name, imgFileName;

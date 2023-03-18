@@ -4,6 +4,9 @@
 
 plugins {
     id 'q3continuing.java-application-conventions'
+
+    // for javafx
+    id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
 dependencies {
@@ -14,4 +17,11 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClass = 'q3continuing.app.App'
+}
+
+// javafx stuff!
+
+javafx {
+    version = "19"
+    modules = [ 'javafx.controls' ]
 }

@@ -1,4 +1,4 @@
-package q3ex11.utils;
+package q3continuing.utilities;
 
 public class CircularDoublyLinkedList<T> {
 
