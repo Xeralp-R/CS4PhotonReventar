@@ -1,6 +1,6 @@
-package q3continuing.app;
+package q3continuing.app.subject;
 
-class Subject {
+public class Subject {
     private String name, imgFileName;
     private double units, grade;
 	

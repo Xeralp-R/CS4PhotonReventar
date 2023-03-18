@@ -1,4 +1,4 @@
-package q3continuing.app;
+package q3continuing.app.scenemanagers;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -7,8 +7,11 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import q3continuing.app.EventWrapper;
+import q3continuing.app.SwitchboardSingleton;
+import q3continuing.app.subject.Subject;
 
-public class SceneBuilder {
+public class SubjectSceneManager {
     public static Pane buildScreen (Subject subject) {
         Label subject_name = new Label(subject.getName());
         ImageView subject_image = new ImageView(subject.getImgFileName());

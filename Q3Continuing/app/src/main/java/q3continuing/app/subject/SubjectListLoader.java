@@ -1,4 +1,4 @@
-package q3continuing.app;
+package q3continuing.app.subject;
 
 public class SubjectListLoader {
     public SubjectList loadSampleSubjectList () {
