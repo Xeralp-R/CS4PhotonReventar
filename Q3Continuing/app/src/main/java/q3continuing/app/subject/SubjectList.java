@@ -13,9 +13,13 @@ public class SubjectList {
         this.subjects.add(subject);
     }
 
+    public Subject getSubject(int i) {
+        return subjects.getElement(i);
+    }
+
     public Optional<Subject> searchSubject(String subject_name) {
         for(int i = 0; i < subjects.size(); ++i) {
-            if (subjects.getElement(i).getName().toLowerCase().equals(subject_name.toLowerCase())) {
+            if (subjects.getElement(i).getName().equalsIgnoreCase(subject_name)) {
                 return Optional.ofNullable(subjects.getElement(i));
             }
         }
@@ -28,5 +32,9 @@ public class SubjectList {
 
     public Subject previousSubject(Subject currentSubject) {
         return subjects.findNode(currentSubject).getPrevious().getData();
+    }
+
+    public int size() {
+        return subjects.size();
     }
 }

@@ -25,3 +25,12 @@ javafx {
     version = "19"
     modules = [ 'javafx.base', 'javafx.controls', 'javafx.fxml' ]
 }
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["src/main/resources", "src/main/java"]
+            includes = ["**/*.fxml", "**/*.png"]
+        }
+    }
+}

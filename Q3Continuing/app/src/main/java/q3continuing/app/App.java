@@ -13,13 +13,9 @@ public class App extends Application {
     final static public int PREFERRED_WIDTH = 600;
     final static public int PREFERRED_HEIGHT = 240;
 
-    public static final SubjectListLoader subjectListLoader = new SubjectListLoader();
-
+    public final SubjectListLoader subjectListLoader = new SubjectListLoader();
     HomeSceneManager homeSceneManager;
     SubjectSceneManager subjectSceneManager;
-
-    CircularDoublyLinkedList<Subject> subjects = new CircularDoublyLinkedList<>();
-    DoublyLinkedNode<Subject> current_subject;
 
     Stage stage;
 
@@ -30,7 +26,7 @@ public class App extends Application {
 
         this.stage = stage;
 
-        homeSceneManager = new HomeSceneManager(subjectListLoader.loadSampleSubjectList());
+        homeSceneManager = new HomeSceneManager(this);
         homeSceneManager.generateScene();
 
         this.stage.setScene(homeSceneManager.getScene());
