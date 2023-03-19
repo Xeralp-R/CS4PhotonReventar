@@ -53,6 +53,9 @@ public class HomeSceneFXMLController implements Initializable {
             // set the image
             ImageView imageview = (ImageView)(subjectBoxes.get(i).getChildren().get(0));
             imageview.setImage(new Image(s.getImgFileName()));
+            imageview.setOnMouseClicked((event) -> {
+                goToSubject(s);
+            });
 
             // set the text
             Text text = (Text)(subjectBoxes.get(i).getChildren().get(1));
@@ -79,5 +82,9 @@ public class HomeSceneFXMLController implements Initializable {
         clearIcons();
         --pageNo;
         setSubjectIcons();
+    }
+
+    private void goToSubject(Subject subject) {
+        manager.presentSubject(subject);
     }
 }

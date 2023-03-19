@@ -1,54 +1,69 @@
 package q3continuing.app.scenemanagers;
 
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import q3continuing.app.EventWrapper;
-import q3continuing.app.SwitchboardSingleton;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import q3continuing.app.App;
 import q3continuing.app.subject.Subject;
+import q3continuing.app.subject.SubjectList;
+
+import java.net.URL;
 
 public class SubjectSceneManager {
-    public static Pane buildScreen (Subject subject) {
-        Label subject_name = new Label(subject.getName());
-        ImageView subject_image = new ImageView(subject.getImgFileName());
-        Label units = new Label(String.format("Units: %.2f", subject.getUnits()));
-        Label grade = new Label(String.format("Grade: %.2f", subject.getGrade()));
+    final App appInstance;
+    SubjectList subjectList;
+    Subject currentSubject;
+    Scene subjectScene;
 
-        VBox central_display = new VBox(10);
-        central_display.getChildren().addAll(subject_name, subject_image, units, grade);
-        
-        central_display.setAlignment(Pos.CENTER);
-            
-        // important stuff for hbox
-        Button button_left = new Button("", new ImageView("arrow_back_ios.png")); // 2nd argument for graphics
-        button_left.setAlignment(Pos.CENTER_LEFT);
-        button_left.setOnAction(event -> {
-            try {
-                SwitchboardSingleton.get_instance().alert("change_screen_event", new EventWrapper(event, "left"));
-            } catch (Exception e) {
-                System.err.print("Impossible error: unknown change screen");
-                System.exit(1);
-            }
-        });
-        
-        Button button_right = new Button("", new ImageView("arrow_forward_ios.png")); // 2nd argument for graphics
-        button_right.setAlignment(Pos.CENTER_RIGHT);
-        button_right.setOnAction(event -> {
-            try {
-                SwitchboardSingleton.get_instance().alert("change_screen_event", new EventWrapper(event, "right"));
-            } catch (Exception e) {
-                System.err.print("Impossible error: unknown change screen");
-                System.exit(1);
-            }
-        });
-        
-        HBox overarching = new HBox(10);
-        overarching.getChildren().addAll(button_left, central_display, button_right);
-        
-        return overarching;
+    public SubjectSceneManager(App appInstance) {
+        this.appInstance = appInstance;
+        this.subjectList = appInstance.subjectListLoader.loadSampleSubjectList();
+    }
+
+    public void generateScene(Subject subject) {
+        this.currentSubject = subject;
+
+        if (this.currentSubject == null) {
+            throw new NullPointerException("No subject given to SubjectSceneManager to read: aborting.");
+        }
+
+        URL fxmlURL = this.getClass().getResource("SubjectScene.fxml");
+        FXMLLoader loader = new FXMLLoader(fxmlURL);
+        try {
+            Parent sceneRoot = loader.load();
+            this.subjectScene = new Scene(sceneRoot);
+        } catch (Exception e) {
+            // That's future mes problem!
+            throw new RuntimeException(e);
+        }
+
+        SubjectSceneFXMLController controller = loader.getController();
+        controller.setManager(this);
+        controller.setSubjectInformation(this.currentSubject);
+    }
+
+    public Scene getScene() {
+        if (this.subjectScene == null) {
+            throw new NullPointerException("Uninitialized subject scene: aborting.");
+        }
+        return this.subjectScene;
+    }
+
+    void callPreviousSubject() {
+        appInstance.presentSubjectScene(subjectList.previousSubject(currentSubject));
+    }
+
+    void callNextSubject() {
+        appInstance.presentSubjectScene(subjectList.nextSubject(currentSubject));
+    }
+    
+    void callSubject(Subject s) {
+        appInstance.presentSubjectScene(s);
+    }
+
+    void returnHome() {
+        this.currentSubject = null;
+        this.subjectScene = null;
+        this.appInstance.presentHomeScene();
     }
 }

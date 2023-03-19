@@ -1,5 +1,7 @@
 package q3continuing.app.subject;
 
+import java.util.Objects;
+
 public class Subject {
     private String name, imgFileName;
     private double units, grade;
@@ -27,5 +29,18 @@ public class Subject {
     }
     public void setGrade(double grade) {
         this.grade = grade;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Subject subject = (Subject) o;
+        return Double.compare(subject.units, units) == 0 && Double.compare(subject.grade, grade) == 0 && name.equals(subject.name) && imgFileName.equals(subject.imgFileName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, imgFileName, units, grade);
     }
 }

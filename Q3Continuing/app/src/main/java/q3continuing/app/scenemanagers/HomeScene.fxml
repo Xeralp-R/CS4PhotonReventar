@@ -5,6 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+
 <VBox xmlns:fx="http://javafx.com/fxml"
       alignment="CENTER"
       maxHeight="-Infinity"
@@ -75,8 +76,8 @@
         </GridPane>
         <HBox alignment="CENTER" prefHeight="31.0" prefWidth="240.0" spacing="20.0">
             <children>
-                <Button fx:id="prev" mnemonicParsing="false" onAction="#previous" prefWidth="50.0" text="Prev"/>
-                <Button fx:id="next" mnemonicParsing="false" onAction="#next" prefWidth="50.0" text="Next"/>
+                <Button fx:id="prev" mnemonicParsing="false" onAction="#previous" prefWidth="100.0" text="Previous"/>
+                <Button fx:id="next" mnemonicParsing="false" onAction="#next" prefWidth="100.0" text="Next"/>
             </children>
         </HBox>
     </children>
