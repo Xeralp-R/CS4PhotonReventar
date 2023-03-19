@@ -1,0 +1,5 @@
+plugins {
+    id 'q3ex11.java-common-conventions' 
+
+    id 'application' 
+}
