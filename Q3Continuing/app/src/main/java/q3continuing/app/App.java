@@ -19,6 +19,22 @@ public class App extends Application {
 
     Stage stage;
 
+    public void presentHomeScene() {
+        if (this.homeSceneManager == null) {
+            this.homeSceneManager = new HomeSceneManager(this);
+        }
+        this.homeSceneManager.generateScene();
+        this.stage.setScene(homeSceneManager.getScene());
+    }
+
+    public void presentSubjectScene(Subject s) {
+        if (this.subjectSceneManager == null) {
+            this.subjectSceneManager = new SubjectSceneManager(this);
+        }
+        this.subjectSceneManager.generateScene(s);
+        this.stage.setScene(subjectSceneManager.getScene());
+    }
+
     @Override
     public void start(Stage stage) {
         //String javaVersion = System.getProperty("java.version");
@@ -26,11 +42,9 @@ public class App extends Application {
 
         this.stage = stage;
 
-        homeSceneManager = new HomeSceneManager(this);
-        homeSceneManager.generateScene();
+        presentHomeScene();
 
-        this.stage.setScene(homeSceneManager.getScene());
-        this.stage.setTitle("Q3Ex11");
+        this.stage.setTitle("Q3Continuing");
         this.stage.show();
     }
 

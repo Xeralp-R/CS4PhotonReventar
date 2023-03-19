@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import q3continuing.app.App;
+import q3continuing.app.subject.Subject;
 import q3continuing.app.subject.SubjectList;
 
 import java.io.InputStream;
@@ -35,7 +36,7 @@ public class HomeSceneManager {
         }
 
         HomeSceneFXMLController controller = loader.getController();
-        controller.setSubjectList(this.subjectList);
+        controller.setManager(this);
         controller.setSubjectIcons();
     }
 
@@ -44,5 +45,9 @@ public class HomeSceneManager {
             throw new NullPointerException("Uninitialized home scene: aborting.");
         }
         return this.homeScene;
+    }
+
+    void presentSubject(Subject subject)  {
+        this.appInstance.presentSubjectScene(subject);
     }
 }

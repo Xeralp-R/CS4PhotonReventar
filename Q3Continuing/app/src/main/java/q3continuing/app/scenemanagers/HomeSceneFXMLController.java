@@ -5,6 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import q3continuing.app.subject.Subject;
 import q3continuing.app.subject.SubjectList;
 
@@ -19,24 +21,24 @@ import java.util.ResourceBundle;
 public class HomeSceneFXMLController implements Initializable {
 
     @FXML
-    private ImageView icon1, icon2, icon3;
+    private VBox subject1, subject2, subject3;
     @FXML
     private Button prev, next;
 
     private int pageNo;
-    private int maxPage;
-    private List<ImageView> iconList;
-
+    private List<VBox> subjectBoxes;
+    private HomeSceneManager manager;
     private SubjectList subjectList;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        iconList = List.of(icon1, icon2, icon3);
+        subjectBoxes = List.of(subject1, subject2, subject3);
         pageNo = 0;
     }
 
-    public void setSubjectList(SubjectList subjectList) {
-        this.subjectList = subjectList;
+    public void setManager(HomeSceneManager manager) {
+        this.manager = manager;
+        this.subjectList = manager.subjectList;
     }
 
     public void setSubjectIcons() {
@@ -45,16 +47,23 @@ public class HomeSceneFXMLController implements Initializable {
         }
 
         int index = pageNo * 3;
-        for (int i = 0; i < iconList.size(); ++i) {
+        for (int i = 0; i < subjectBoxes.size(); ++i) {
             Subject s = subjectList.getSubject(index + i);
-            Image img = new Image(s.getImgFileName());
-            iconList.get(i).setImage(img);
+
+            // set the image
+            ImageView imageview = (ImageView)(subjectBoxes.get(i).getChildren().get(0));
+            imageview.setImage(new Image(s.getImgFileName()));
+
+            // set the text
+            Text text = (Text)(subjectBoxes.get(i).getChildren().get(1));
+            text.setText(s.getName());
         }
     }
 
     public void clearIcons() {
-        for (ImageView i : iconList) {
-            i.setImage(null);
+        for (VBox i : subjectBoxes) {
+            ImageView imageView = (ImageView)(i.getChildren().get(0));
+            imageView.setImage(null);
         }
     }
 
