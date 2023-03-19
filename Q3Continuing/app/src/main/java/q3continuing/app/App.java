@@ -42,7 +42,9 @@ public class App extends Application {
 
         this.stage = stage;
 
-        presentHomeScene();
+        //presentHomeScene();
+        // for ex13:
+        presentSubjectScene(subjectListLoader.loadSampleSubjectList().getSubject(0));
 
         this.stage.setTitle("Q3Continuing");
         this.stage.show();

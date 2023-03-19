@@ -18,7 +18,7 @@ public class SubjectSceneFXMLController implements Initializable {
     @FXML
     private Text titleText;
     @FXML
-    private Text unitText, gradeText;
+    private Text unitText, gradeText, errorText;
     @FXML
     private Button prevButton, nextButton, backButton;
     @FXML
@@ -69,16 +69,20 @@ public class SubjectSceneFXMLController implements Initializable {
 
         if (subjectSearched.isEmpty()) {
             // error dialog
+            /*
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Subject Not Found");
             alert.setHeaderText("Error: Subject Not Found");
             alert.setContentText("It looks like you're looking for a subject that this student isn't taking. Please try again.");
 
             alert.showAndWait();
+            return;*/
+            errorText.setText("Subject not found.");
             return;
         }
 
         // presumed has a subject
+        errorText.setText(null);
         this.manager.callSubject(subjectSearched.get());
     }
 
@@ -92,7 +96,7 @@ public class SubjectSceneFXMLController implements Initializable {
         manager.callNextSubject();
     }
 
-    @FXML
+    //@FXML
     private void backAction() {
         manager.returnHome();
     }
