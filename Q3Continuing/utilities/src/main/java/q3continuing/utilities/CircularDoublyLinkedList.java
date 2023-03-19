@@ -121,6 +121,14 @@ public class CircularDoublyLinkedList<T> {
         if (found) return location.getData(); else return null;
     }
 
+    public T getFirstElement() {
+        return head.getData();
+    }
+
+    public T getLastElement() {
+        return tail.getData();
+    }
+
     // Initializes current position for an iteration through this list,
     // to the first element on this list.
     public void reset() {

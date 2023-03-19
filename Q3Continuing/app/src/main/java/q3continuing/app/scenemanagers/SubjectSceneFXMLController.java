@@ -52,6 +52,13 @@ public class SubjectSceneFXMLController implements Initializable {
         this.unitText.setText(String.format("%.2f", subject.getUnits()));
         this.gradeText.setText(String.format("%.2f", subject.getGrade()));
         this.subjectPicture.setImage(new Image(subject.getImgFileName()));
+
+        if (manager.subjectList.isFirst(subject)) {
+            this.prevButton.setDisable(true);
+        }
+        if (manager.subjectList.isLast(subject)) {
+            this.nextButton.setDisable(true);
+        }
     }
 
     public void clearSubjectInformation() {

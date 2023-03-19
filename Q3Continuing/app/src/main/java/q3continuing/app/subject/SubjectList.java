@@ -34,6 +34,14 @@ public class SubjectList {
         return subjects.findNode(currentSubject).getPrevious().getData();
     }
 
+    public boolean isFirst(Subject subject) {
+        return subjects.getFirstElement().equals(subject);
+    }
+
+    public boolean isLast(Subject subject) {
+        return subjects.getLastElement().equals(subject);
+    }
+
     public int size() {
         return subjects.size();
     }
