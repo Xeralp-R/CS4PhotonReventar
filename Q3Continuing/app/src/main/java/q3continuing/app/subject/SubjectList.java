@@ -37,4 +37,12 @@ public class SubjectList {
     public int size() {
         return subjects.size();
     }
+
+    public void fitSubjects(int listSize) {
+        int deficiency = (listSize - (this.size() % listSize)) % listSize;
+
+        for (int i = 0; i < deficiency; ++i) {
+            this.registerSubject(null);
+        }
+    }
 }

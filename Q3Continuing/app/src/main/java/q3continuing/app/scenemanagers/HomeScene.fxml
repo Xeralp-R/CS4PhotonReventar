@@ -80,6 +80,7 @@
                 <Button fx:id="next" mnemonicParsing="false" onAction="#next" prefWidth="100.0" text="Next"/>
             </children>
         </HBox>
+        <Button fx:id="load" mnemonicParsing="false" onAction="#load" prefWidth="100.0" text="Load csv file"/>
     </children>
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>

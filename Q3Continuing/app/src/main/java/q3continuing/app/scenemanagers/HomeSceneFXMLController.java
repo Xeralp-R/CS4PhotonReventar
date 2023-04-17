@@ -13,6 +13,7 @@ import q3continuing.app.subject.SubjectList;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -23,7 +24,7 @@ public class HomeSceneFXMLController implements Initializable {
     @FXML
     private VBox subject1, subject2, subject3;
     @FXML
-    private Button prev, next;
+    private Button prev, next, load;
 
     private int pageNo;
     private List<VBox> subjectBoxes;
@@ -41,14 +42,26 @@ public class HomeSceneFXMLController implements Initializable {
         this.subjectList = manager.subjectList;
     }
 
+    public void setSubjectList(SubjectList subjectList) {
+        if (subjectList != manager.subjectList) {
+            throw new RuntimeException("Error: discrepancy in manager and controller subject lists.");
+        }
+        this.subjectList = subjectList;
+        this.subjectList.fitSubjects(this.subjectBoxes.size());
+    }
+
     public void setSubjectIcons() {
         if (subjectList == null) {
-            throw new NullPointerException("Uninitialized subjectList in Home Screen. Aborting.");
+            return; // if there's nothing, no need for anything
         }
 
         int index = pageNo * 3;
         for (int i = 0; i < subjectBoxes.size(); ++i) {
-            Subject s = subjectList.getSubject(index + i);
+            Optional<Subject> subj_opt = Optional.ofNullable(subjectList.getSubject(index + i));
+            if (subj_opt.isEmpty()) {
+                continue;
+            }
+            Subject s = subj_opt.get();
 
             // set the image
             ImageView imageview = (ImageView)(subjectBoxes.get(i).getChildren().get(0));
@@ -67,6 +80,8 @@ public class HomeSceneFXMLController implements Initializable {
         for (VBox i : subjectBoxes) {
             ImageView imageView = (ImageView)(i.getChildren().get(0));
             imageView.setImage(null);
+            Text text = (Text)(i.getChildren().get(1));
+            text.setText(null);
         }
     }
 
@@ -82,6 +97,14 @@ public class HomeSceneFXMLController implements Initializable {
         clearIcons();
         --pageNo;
         setSubjectIcons();
+    }
+
+    @FXML
+    private void load() {
+        this.clearIcons();
+        this.pageNo = 0;
+        this.setSubjectList(this.manager.loadSubject());
+        this.setSubjectIcons();
     }
 
     private void goToSubject(Subject subject) {

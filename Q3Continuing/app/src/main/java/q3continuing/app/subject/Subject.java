@@ -3,12 +3,12 @@ package q3continuing.app.subject;
 import java.util.Objects;
 
 public class Subject {
-    private String name, imgFileName;
+    final private String name, imgFileName;
     private double units, grade;
 	
     public Subject(String n, String i, double u, double g){
         name = n;
-        imgFileName = i;
+        imgFileName = i.replace(" ", "_");
         units = u;
         grade = g;
     }
